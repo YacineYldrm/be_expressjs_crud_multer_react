@@ -70,5 +70,5 @@ app.patch("/api/data/toggleDone/:todoID", (req, res) => {
     }).then(data => writeJsonFile("./data.json", data)).then(data => res.json(data));
 });
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log("Server is listening at PORT:", PORT));
