@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { backendURL } from "../api/api";
 
 const Home = () => {
     
@@ -7,7 +8,7 @@ const Home = () => {
     const [fileUpload, setFileUpload] = useState();
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/data')
+        fetch(backendURL + '/api/data')
         .then(res => res.json())
         .then(data => setCheckList(data))
         .catch(err => console.log(err));
@@ -19,7 +20,7 @@ const Home = () => {
     }; 
 
     // const handleAddTask = () => {
-    //     fetch('http://localhost:8080/api/data/post', {
+    //     fetch(backendURL + '/api/data/post', {
     //         method: "POST",
     //         body: JSON.stringify({ "task": newTask}),
     //         headers: { "Content-Type": "application/json" }
@@ -29,7 +30,7 @@ const Home = () => {
     // };
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:8080/api/data/delete/${id}`, {
+        fetch(backendURL + `/api/data/delete/${id}`, {
             method: "DELETE"
         })
         .then(res => res.json())
@@ -37,7 +38,7 @@ const Home = () => {
     }
 
     const handleToggleDone = (id) => {
-        fetch(`http://localhost:8080/api/data/toggleDone/${id}`, {
+        fetch(backendURL + `/api/data/toggleDone/${id}`, {
             method: "PATCH"
         })
         .then(res => res.json())
@@ -52,7 +53,7 @@ const Home = () => {
         const formdata = new FormData();
         formdata.append("task", newTask);
         formdata.append("image", fileUpload);
-        fetch("http://localhost:8080/api/data/upload", {
+        fetch(backendURL + "/api/data/upload", {
             method: "POST",
             body: formdata
         })
